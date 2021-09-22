@@ -1,2 +1,2 @@
 # demo-notebooks
-Demo notebooks for various frameworks and libraries
+Demo notebooks and scripts for various frameworks and libraries.
