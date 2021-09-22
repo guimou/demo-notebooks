@@ -1,0 +1,83 @@
+---
+title: "R Visualization"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(gapminder)
+library(tidyverse)
+```
+
+```{r}
+head(gapminder, n=8) # list the first 8 rows in the dataset
+tail(gapminder, n=10) # list the last 10 rows in the dataset
+summary(gapminder) # recommended method
+```
+
+```{r}
+p <- ggplot( data=gapminder, aes(x = gdpPercap, y = lifeExp)) + geom_point()
+p
+```
+
+```{r}
+p <- p + scale_x_log10()
+p
+```
+
+```{r}
+p <- p + aes(color=continent)
+p
+```
+```{r}
+p + aes(size=pop)
+```
+
+```{r}
+p + geom_jitter(width=2,height=2)
+```
+
+
+```{r}
+p+geom_smooth(lwd=3)
+```
+```{r}
+p <- ggplot( data=gapminder, aes(x = year, y = lifeExp)) + geom_line()
+p
+```
+```{r}
+p<-p+aes(group=country)
+p <- p +  aes(color=continent)
+p
+```
+```{r}
+p <- p +  facet_wrap(~continent)
+p
+```
+
+```{r}
+ggplot(subset(gapminder, country=='Afghanistan' | country=='China' | country=='United States' | country=='Sweden' | country=='Japan' | country=='Kuwait' | country=='Malawi' | country=='Pakistan'), aes(x=year,y=lifeExp,colour=country))+geom_line(lwd=1.5)
+```
+
+```{r}
+ggplot(data=gapminder, aes(x=continent, y=lifeExp))+geom_boxplot()
+```
+```{r}
+ggplot(data=gapminder, aes(x=continent, y=lifeExp))+geom_boxplot(outlier.colour = "red")+geom_jitter(width=0.2)
+```
+```{r}
+ggplot(data=gapminder, aes(fill=continent, x=lifeExp))+geom_histogram()
+```
+```{r}
+ggplot(data=gapminder, aes(fill=continent, x=lifeExp))+ geom_density(alpha = 0.2)+xlab('Life Expectancy')+ylab('Probability Density Function')
+```
+```{r}
+ggplot(data=gapminder, aes(x=continent))+ geom_bar()
+```
+```{r}
+ggplot(data=subset(gapminder, year==2007), aes(x=continent))+ geom_bar() +coord_flip()
+```
+
